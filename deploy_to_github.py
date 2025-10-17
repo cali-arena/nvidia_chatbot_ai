@@ -111,7 +111,7 @@ def show_security_features():
     print("   • Limpeza automática de sessões inativas")
     
     print("\n✅ LIMITES DE UPLOAD:")
-    print("   • 50MB por arquivo máximo")
+    print("   • 2GB por arquivo máximo")
     print("   • 10 arquivos por sessão máximo")
     print("   • Tipos: PDF, TXT, DOCX, PNG, JPG, JPEG, GIF, BMP")
     

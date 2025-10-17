@@ -22,7 +22,7 @@ Este sistema foi especialmente configurado para permitir que várias pessoas ace
 - Limpeza automática de sessões inativas
 
 #### ✅ Limites de Upload
-- **50MB por arquivo** máximo
+- **2GB por arquivo** máximo
 - **10 arquivos por sessão** máximo
 - Tipos suportados: PDF, TXT, DOCX, PNG, JPG, JPEG, GIF, BMP
 

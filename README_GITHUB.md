@@ -21,7 +21,7 @@ Sistema de chatbot inteligente com IA da NVIDIA, configurado para múltiplos usu
 - ✅ **Isolamento de Sessões**: Cada usuário tem sessão única
 - ✅ **Rate Limiting**: 30 req/min, 500 req/hora por usuário
 - ✅ **Timeout Automático**: Sessões expiram em 1 hora
-- ✅ **Limites de Upload**: 50MB por arquivo, 10 arquivos por sessão
+- ✅ **Limites de Upload**: 2GB por arquivo, 10 arquivos por sessão
 - ✅ **Proteção XSRF**: Segurança contra ataques
 - ✅ **Logs de Segurança**: Monitoramento de eventos
 

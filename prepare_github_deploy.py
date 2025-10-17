@@ -205,7 +205,7 @@ def show_deploy_instructions(github_dir):
     print("  ✅ Isolamento de sessões")
     print("  ✅ Rate limiting (30 req/min)")
     print("  ✅ Timeout automático (1 hora)")
-    print("  ✅ Limites de upload (50MB)")
+    print("  ✅ Limites de upload (2GB)")
     print("  ✅ Proteção XSRF")
     print("  ✅ Logs de segurança")
     print("  ✅ Monitoramento de uso")

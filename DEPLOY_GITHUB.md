@@ -113,7 +113,7 @@ git push origin main
 - Timeout automático em 1 hora
 
 ### Limites de Upload
-- **50MB por arquivo** máximo
+- **2GB por arquivo** máximo
 - **10 arquivos por sessão** máximo
 - Tipos: PDF, TXT, DOCX, PNG, JPG, JPEG, GIF, BMP
 

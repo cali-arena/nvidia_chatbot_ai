@@ -19,7 +19,7 @@
 - ✅ Isolamento de sessões por usuário
 - ✅ Rate limiting (30 req/min por usuário)
 - ✅ Timeout de sessão (1 hora)
-- ✅ Upload limitado (50MB por arquivo)
+- ✅ Upload limitado (2GB por arquivo)
 - ✅ Proteção XSRF habilitada
 
 ### 4. Variáveis de Ambiente
@@ -38,7 +38,7 @@ Configure no Streamlit Cloud:
 1. **Isolamento de Sessões**: Cada usuário tem sua própria sessão isolada
 2. **Rate Limiting**: Máximo 30 requisições por minuto por usuário
 3. **Timeout de Sessão**: Sessões expiram em 1 hora
-4. **Limite de Upload**: Máximo 50MB por arquivo
+4. **Limite de Upload**: Máximo 2GB por arquivo
 5. **Proteção XSRF**: Proteção contra ataques cross-site
 6. **Logs de Segurança**: Monitoramento de atividades suspeitas
 
