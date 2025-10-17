@@ -14,3 +14,4 @@ numpy
 chromadb
 tiktoken
 typing-extensions
+scikit-learn

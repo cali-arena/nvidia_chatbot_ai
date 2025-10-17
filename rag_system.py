@@ -49,9 +49,21 @@ except ImportError:
     tiktoken = None
 
 # Evaluation
-from sklearn.metrics.pairwise import cosine_similarity
-import matplotlib.pyplot as plt
-import seaborn as sns
+try:
+    from sklearn.metrics.pairwise import cosine_similarity
+    SKLEARN_AVAILABLE = True
+except ImportError:
+    SKLEARN_AVAILABLE = False
+    cosine_similarity = None
+
+try:
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    PLOTTING_AVAILABLE = True
+except ImportError:
+    PLOTTING_AVAILABLE = False
+    plt = None
+    sns = None
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
