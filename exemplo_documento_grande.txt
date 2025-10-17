@@ -1,0 +1,247 @@
+DOCUMENTO DE EXEMPLO PARA TESTE DO SISTEMA RAG
+===============================================
+
+Este é um documento de exemplo criado para testar o sistema RAG avançado com suporte a arquivos grandes.
+
+SEÇÃO 1: INTRODUÇÃO AO SISTEMA RAG
+==================================
+
+O sistema RAG (Retrieval-Augmented Generation) implementado oferece capacidades avançadas para processamento de documentos grandes, com suporte até 2GB por arquivo. O sistema utiliza:
+
+- ChromaDB como vector store principal
+- Embeddings NVIDIA AI para alta qualidade
+- Chunking inteligente com sobreposição
+- Sistema de avaliação automática
+
+SEÇÃO 2: ARQUITETURA TÉCNICA
+============================
+
+O sistema é composto por quatro componentes principais:
+
+1. LargeFileProcessor: Processa arquivos grandes de forma eficiente
+2. VectorStoreManager: Gerencia embeddings e vector store
+3. RAGAgent: Agente inteligente para consultas RAG
+4. RAGEvaluator: Sistema de avaliação de respostas
+
+SEÇÃO 3: CONFIGURAÇÕES E PARÂMETROS
+===================================
+
+O sistema RAG pode ser configurado com os seguintes parâmetros:
+
+- chunk_size: 1000 caracteres (padrão)
+- chunk_overlap: 200 caracteres (padrão)
+- max_file_size_gb: 2.0 GB (padrão)
+- embedding_model: nvidia/Llama-3.2-3B-Instruct-TensorRT-LLM
+- vector_store_type: chroma (padrão)
+- retrieval_k: 5 documentos (padrão)
+- similarity_threshold: 0.7 (padrão)
+
+SEÇÃO 4: TIPOS DE CONSULTAS SUPORTADAS
+======================================
+
+O sistema suporta diversos tipos de consultas:
+
+CONSULTAS SIMPLES:
+- "O que diz o documento sobre X?"
+- "Resuma o conteúdo principal"
+- "Quais são os pontos principais?"
+
+CONSULTAS COMPLEXAS:
+- "Compare as informações entre os documentos"
+- "Qual é a relação entre X e Y?"
+- "Analise as tendências mencionadas"
+
+CONSULTAS ESPECÍFICAS:
+- "Encontre dados financeiros"
+- "Liste as recomendações"
+- "Extraia métricas importantes"
+
+SEÇÃO 5: MÉTRICAS E AVALIAÇÃO
+=============================
+
+O sistema inclui um sistema de avaliação automática com as seguintes métricas:
+
+1. Relevance Score: Relevância dos documentos encontrados (0-1)
+2. Completeness Score: Completude da resposta (0-1)
+3. Overall Score: Score geral de qualidade (0-1)
+4. Confidence Score: Confiança na resposta (0-1)
+
+SEÇÃO 6: OTIMIZAÇÕES DE PERFORMANCE
+===================================
+
+O sistema implementa várias otimizações:
+
+- Chunking inteligente com sobreposição para manter contexto
+- Embeddings cached para evitar reprocessamento
+- Busca eficiente por similaridade vetorial
+- Processamento assíncrono para não bloquear a interface
+- Validação de arquivos para evitar processamento desnecessário
+
+SEÇÃO 7: CASOS DE USO IDEAIS
+=============================
+
+O sistema RAG é ideal para:
+
+1. DOCUMENTAÇÃO TÉCNICA:
+   - Manuais de produtos
+   - Documentação de APIs
+   - Guias de implementação
+
+2. RELATÓRIOS FINANCEIROS:
+   - Balanços patrimoniais
+   - Relatórios anuais
+   - Análises de mercado
+
+3. PESQUISA ACADÊMICA:
+   - Papers científicos
+   - Teses e dissertações
+   - Artigos de pesquisa
+
+4. CONTEÚDO EMPRESARIAL:
+   - Políticas internas
+   - Procedimentos operacionais
+   - Treinamentos
+
+SEÇÃO 8: LIMITAÇÕES E CONSIDERAÇÕES
+===================================
+
+LIMITAÇÕES ATUAIS:
+- Tamanho máximo de arquivo: 2GB
+- Processamento sequencial de arquivos
+- Dependência de conexão com NVIDIA AI
+
+CONSIDERAÇÕES TÉCNICAS:
+- Memória RAM necessária para arquivos grandes
+- Tempo de processamento proporcional ao tamanho
+- Qualidade dos embeddings afeta resultados
+
+SEÇÃO 9: TROUBLESHOOTING
+========================
+
+PROBLEMAS COMUNS:
+
+1. RAG não funciona:
+   - Verificar se dependências estão instaladas
+   - Verificar logs no terminal
+   - Procurar por erros de importação
+
+2. Arquivo muito grande:
+   - Verificar tamanho do arquivo (limite 2GB)
+   - Dividir arquivo se necessário
+
+3. Embeddings lentos:
+   - NVIDIA embeddings são mais rápidos
+   - Fallback para HuggingFace se necessário
+   - Considerar cache de embeddings
+
+4. Vector store não persiste:
+   - ChromaDB salva em ./chroma_db/
+   - Verificar permissões de escrita
+   - Limpar cache se necessário
+
+SEÇÃO 10: PRÓXIMAS MELHORIAS
+============================
+
+FUNCIONALIDADES PLANEJADAS:
+1. Multi-modal RAG com integração de imagens
+2. Agentes especializados para diferentes domínios
+3. Atualizações em tempo real
+4. Embeddings personalizados
+5. Processamento distribuído
+
+OTIMIZAÇÕES FUTURAS:
+1. Aceleração com GPU
+2. Processamento em streaming
+3. Cache avançado
+4. Balanceamento de carga
+
+SEÇÃO 11: EXEMPLOS DE DADOS FINANCEIROS
+=======================================
+
+Para demonstrar a capacidade de processamento de dados estruturados:
+
+RECEITAS ANUAIS:
+- 2023: R$ 1.250.000
+- 2022: R$ 1.100.000
+- 2021: R$ 980.000
+
+CUSTOS OPERACIONAIS:
+- Salários: R$ 450.000
+- Aluguel: R$ 120.000
+- Tecnologia: R$ 80.000
+- Marketing: R$ 60.000
+
+MARGEM DE LUCRO:
+- 2023: 15.2%
+- 2022: 12.8%
+- 2021: 10.5%
+
+SEÇÃO 12: RECOMENDAÇÕES ESTRATÉGICAS
+====================================
+
+Baseado na análise dos dados apresentados, as seguintes recomendações são sugeridas:
+
+1. AUMENTO DE RECEITA:
+   - Investir em marketing digital
+   - Expandir para novos mercados
+   - Desenvolver novos produtos
+
+2. REDUÇÃO DE CUSTOS:
+   - Otimizar processos operacionais
+   - Automatizar tarefas repetitivas
+   - Negociar melhores condições com fornecedores
+
+3. MELHORIA DE MARGEM:
+   - Focar em produtos de maior valor agregado
+   - Implementar precificação estratégica
+   - Controlar custos operacionais
+
+SEÇÃO 13: MÉTRICAS DE PERFORMANCE
+=================================
+
+KPIs IMPORTANTES:
+- Taxa de conversão: 3.2%
+- Ticket médio: R$ 125
+- Lifetime Value: R$ 1.450
+- Churn Rate: 8.5%
+
+MÉTRICAS DE SATISFAÇÃO:
+- NPS Score: 72
+- CSAT: 4.3/5.0
+- Tempo de resposta: 2.3 horas
+- Taxa de resolução: 94%
+
+SEÇÃO 14: ANÁLISE DE TENDÊNCIAS
+===============================
+
+TENDÊNCIAS IDENTIFICADAS:
+1. Crescimento consistente de receita (15% ao ano)
+2. Melhoria gradual da margem de lucro
+3. Aumento da satisfação do cliente
+4. Redução do churn rate
+
+PROJEÇÕES:
+- Receita 2024: R$ 1.400.000
+- Margem 2024: 17.5%
+- NPS 2024: 75+
+- Churn 2024: <7%
+
+SEÇÃO 15: CONCLUSÕES
+====================
+
+O sistema RAG implementado oferece uma solução robusta e escalável para processamento de documentos grandes, com capacidades avançadas de busca semântica e geração de respostas contextualizadas.
+
+PRINCIPAIS BENEFÍCIOS:
+- Processamento eficiente de arquivos até 2GB
+- Busca semântica inteligente
+- Avaliação automática de qualidade
+- Interface intuitiva e responsiva
+
+O sistema está pronto para uso em produção e pode ser facilmente expandido com novas funcionalidades conforme necessário.
+
+---
+
+FIM DO DOCUMENTO
+================
+
+Este documento contém aproximadamente 3.000 palavras e serve como exemplo completo para testar todas as funcionalidades do sistema RAG avançado implementado.

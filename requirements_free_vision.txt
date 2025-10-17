@@ -1,0 +1,22 @@
+# Free Local Vision Models Requirements
+# Choose based on your needs:
+
+# Option 1: LLaVA (Best quality, needs GPU)
+torch>=2.0.0
+transformers>=4.35.0
+accelerate>=0.20.0
+pillow>=10.0.0
+
+# Option 2: EasyOCR (Simple, no GPU needed)
+easyocr>=1.7.0
+opencv-python>=4.8.0
+
+# Option 3: Qwen-VL (Good balance)
+# Same as LLaVA requirements
+
+# Option 4: Tesseract (Traditional OCR)
+pytesseract>=0.3.10
+
+# Common dependencies
+requests>=2.31.0
+numpy>=1.24.0
