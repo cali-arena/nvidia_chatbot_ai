@@ -125,12 +125,26 @@ def main():
         
         # Botão para limpar sessão
         if st.button("🗑️ Limpar Minha Sessão", use_container_width=True):
+            # Limpar mensagens do chat
             st.session_state.user_messages = []
+            
+            # Limpar documentos e imagens carregados
             st.session_state.user_uploads = []
+            
+            # Limpar contextos de documentos e imagens
             st.session_state.user_context = ""
             st.session_state.user_image_context = ""
+            
+            # Resetar contador de requisições
             st.session_state.user_request_count = 0
+            
+            # Log do evento
             log_security_event("SESSION_CLEARED", "User manually cleared session")
+            
+            # Mostrar confirmação
+            st.success("✅ Chat, documentos e imagens limpos com sucesso!")
+            
+            # Forçar rerun para atualizar a interface
             st.rerun()
     
     # Importar e executar o app principal com contexto isolado

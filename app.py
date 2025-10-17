@@ -938,14 +938,30 @@ Seja detalhado na sua análise visual."""
 
 # Clear chat button - moved to be closer to uploads and processing
 if st.button("🗑️ Limpar Histórico do Chat", use_container_width=True):
+    # Limpar mensagens do chat
     st.session_state.messages = []
+    
+    # Limpar documentos e imagens carregados
     st.session_state.uploaded_docs = []
     st.session_state.uploaded_images = []
-    # Clear contexts too
+    
+    # Limpar contextos de documentos e imagens
     if "document_context" in st.session_state:
         st.session_state.document_context = ""
     if "image_text_context" in st.session_state:
         st.session_state.image_text_context = ""
+    
+    # Limpar variáveis locais também
+    uploaded_files = []
+    uploaded_images = []
+    document_context = ""
+    image_text_context = ""
+    image_context = []
+    
+    # Mostrar confirmação
+    st.success("✅ Chat, documentos e imagens limpos com sucesso!")
+    
+    # Forçar rerun para atualizar a interface
     st.rerun()
 
 # Add authorship and credits below uploads
