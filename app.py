@@ -53,26 +53,29 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS to hide Streamlit's default text and show our custom text
+# Custom CSS to completely hide Streamlit's default text
 st.markdown("""
 <style>
-/* Hide Streamlit's default file uploader text completely */
+/* Hide ALL Streamlit default file uploader text */
 .stFileUploader > div > div > div > div > div {
     display: none !important;
 }
 
-/* Hide the specific text that shows "Limit 200MB per file" */
-.stFileUploader > div > div > div > div > div > div {
+/* Hide any text containing "200MB" or "MB" */
+div:contains("200MB"), div:contains("MB per file") {
     display: none !important;
 }
 
-/* Hide any remaining Streamlit default text */
-.stFileUploader > div > div > div > div > div > div > div {
-    display: none !important;
-}
-
-/* Hide the entire default uploader text area */
+/* Hide the entire uploader text container */
+.stFileUploader > div > div > div > div > div > div,
+.stFileUploader > div > div > div > div > div > div > div,
 .stFileUploader > div > div > div > div > div > div > div > div {
+    display: none !important;
+}
+
+/* Hide any element that contains "Limit" and "MB" */
+div[class*="upload"]:has-text("200MB"),
+div[class*="upload"]:has-text("MB per file") {
     display: none !important;
 }
 
