@@ -56,8 +56,23 @@ st.set_page_config(
 # Custom CSS to hide Streamlit's default text and show our custom text
 st.markdown("""
 <style>
-/* Hide Streamlit's default file uploader text */
+/* Hide Streamlit's default file uploader text completely */
 .stFileUploader > div > div > div > div > div {
+    display: none !important;
+}
+
+/* Hide the specific text that shows "Limit 200MB per file" */
+.stFileUploader > div > div > div > div > div > div {
+    display: none !important;
+}
+
+/* Hide any remaining Streamlit default text */
+.stFileUploader > div > div > div > div > div > div > div {
+    display: none !important;
+}
+
+/* Hide the entire default uploader text area */
+.stFileUploader > div > div > div > div > div > div > div > div {
     display: none !important;
 }
 
