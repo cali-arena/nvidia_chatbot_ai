@@ -66,9 +66,26 @@ STREAMLIT_SERVER_ENABLE_CORS=false
 
 ### Obter API Key da NVIDIA
 1. Acesse: https://build.nvidia.com/
-2. Crie uma conta
+2. Crie uma conta gratuita
 3. Gere sua API key
 4. Configure no Streamlit Cloud ou localmente
+
+### Configuração Local
+```bash
+# Copie o arquivo de exemplo
+cp env_example.txt .env
+
+# Edite o arquivo .env e adicione sua chave real
+NVIDIA_API_KEY=nvapi-sua_chave_real_aqui
+```
+
+### Configuração no Streamlit Cloud
+1. Acesse as configurações do seu app
+2. Vá em "Secrets"
+3. Adicione:
+```toml
+NVIDIA_API_KEY = "nvapi-sua_chave_real_aqui"
+```
 
 ## 📊 Funcionalidades
 

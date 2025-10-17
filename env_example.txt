@@ -1,0 +1,10 @@
+# Configuração da NVIDIA API Key
+# Copie este arquivo para .env e adicione sua chave real
+
+NVIDIA_API_KEY=nvapi-sua_chave_aqui
+
+# Para obter sua chave:
+# 1. Acesse: https://build.nvidia.com/
+# 2. Crie uma conta gratuita
+# 3. Gere sua API key
+# 4. Substitua 'nvapi-sua_chave_aqui' pela sua chave real
