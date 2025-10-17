@@ -948,20 +948,6 @@ if st.button("🗑️ Limpar Histórico do Chat", use_container_width=True):
         st.session_state.image_text_context = ""
     st.rerun()
 
-# RAG System Statistics
-if st.session_state.rag_enabled:
-    with st.expander("📊 Estatísticas do Sistema RAG", expanded=False):
-        try:
-            stats = st.session_state.rag_system.get_system_stats()
-            st.write(f"**📁 Arquivos processados:** {stats.get('total_documents', 0)}")
-            st.write(f"**📄 Total de documentos:** {stats.get('total_chunks', 0)} chunks")
-            st.write(f"**📏 Tamanho do chunk:** {stats.get('chunk_size', 0)} caracteres")
-            st.write(f"**💾 Tamanho máximo:** {stats.get('max_file_size', 0)} MB")
-            st.write(f"**🗄️ Tipo de vector store:** {stats.get('vector_store_type', 'N/A')}")
-            st.write(f"**⭐ Qualidade média:** {stats.get('average_quality_score', 0):.2f}")
-        except Exception as e:
-            st.error(f"Erro ao obter estatísticas: {e}")
-
 # Add authorship and credits below uploads
 st.markdown("---")
 st.markdown("""
