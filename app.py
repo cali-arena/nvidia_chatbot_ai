@@ -545,23 +545,7 @@ def get_chat_response(user_message: str, chat_history: List, context: str = "", 
 # Main app
 st.title("🤖 NVIDIA AI Chatbot with Advanced RAG System")
 
-# Display chat messages
-st.divider()
-chat_container = st.container()
-
-with chat_container:
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-# Initialize variables for context
-document_context = ""
-image_text_context = ""
-image_context = []
-uploaded_files = []
-uploaded_images = []
-
-# Chat input
+# Chat input - MOVED TO TOP
 if prompt := st.chat_input("Ask me anything..."):
     # Add user message to chat
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -581,12 +565,12 @@ if prompt := st.chat_input("Ask me anything..."):
                 full_context += st.session_state.image_text_context
             
             # Add current upload contexts if they exist
-            if document_context:
+            if "document_context" in locals():
                 full_context += document_context
-            if image_text_context:
+            if "image_text_context" in locals():
                 full_context += image_text_context
                 
-            if uploaded_images:
+            if "uploaded_images" in locals() and uploaded_images:
                 full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
             
             response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
@@ -594,6 +578,22 @@ if prompt := st.chat_input("Ask me anything..."):
     
     # Add assistant response to chat
     st.session_state.messages.append({"role": "assistant", "content": response})
+
+# Display chat messages
+st.divider()
+chat_container = st.container()
+
+with chat_container:
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+# Initialize variables for context
+document_context = ""
+image_text_context = ""
+image_context = []
+uploaded_files = []
+uploaded_images = []
 
 # Upload sections integrated below chat input - more beautiful and integrated
 st.markdown("---")
