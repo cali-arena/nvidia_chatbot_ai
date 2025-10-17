@@ -244,14 +244,13 @@ def encode_image_to_base64(image_file) -> str:
         return f"Error encoding image: {str(e)}"
 
 def extract_text_easyocr(image_file) -> str:
-    """Extract text using EasyOCR (FREE, no GPU needed)"""
+    """Extract text using EasyOCR (OTIMIZADO - sem loading messages)"""
     try:
         import easyocr
         
-        # Initialize reader (only once)
+        # Initialize reader (only once) - SEM SPINNER
         if 'easyocr_reader' not in st.session_state:
-            with st.spinner("Loading EasyOCR (first time only)..."):
-                st.session_state.easyocr_reader = easyocr.Reader(['en', 'pt'], gpu=False)
+            st.session_state.easyocr_reader = easyocr.Reader(['en', 'pt'], gpu=False)
         
         # Process image directly without saving to temp file
         image = Image.open(image_file)
