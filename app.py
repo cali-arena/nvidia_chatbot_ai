@@ -53,52 +53,42 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS for better UI
+# Custom CSS to hide Streamlit's default text and show our custom text
 st.markdown("""
-    <style>
-    .main {
-        background-color: #0e1117;
-    }
-    .stTextInput > div > div > input {
-        background-color: #1e2130;
-        color: white;
-    }
-    .chat-message {
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1rem;
-        display: flex;
-        flex-direction: column;
-    }
-    .chat-message.user {
-        background-color: #2b313e;
-    }
-    .chat-message.assistant {
-        background-color: #1e2130;
-    }
-    .chat-message .message {
-        color: #ffffff;
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-    .stButton > button {
-        background-color: #76b900;
-        color: white;
-        border-radius: 5px;
-        padding: 0.5rem 1rem;
-        font-weight: bold;
-    }
-    .stButton > button:hover {
-        background-color: #5a8f00;
-    }
-    .upload-section {
-        background-color: #1e2130;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1rem;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+<style>
+/* Hide Streamlit's default file uploader text */
+.stFileUploader > div > div > div > div > div {
+    display: none !important;
+}
+
+/* Custom file uploader styling */
+.custom-uploader {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 2px dashed #dee2e6;
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+.custom-uploader-text {
+    font-weight: bold;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.custom-uploader-limit {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.custom-uploader-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Initialize session state
 if "messages" not in st.session_state:
@@ -620,16 +610,10 @@ with st.container():
         
         # Custom file uploader with correct 2GB display
         st.markdown("""
-        <div style='background-color: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border: 2px dashed #dee2e6; margin: 0.5rem 0;'>
-            <div style='display: flex; align-items: center; justify-content: space-between;'>
-                <div style='display: flex; align-items: center;'>
-                    <span style='font-size: 1.5rem; margin-right: 0.5rem;'>☁️</span>
-                    <div>
-                        <div style='font-weight: bold; color: #495057;'>Drag and drop files here</div>
-                        <div style='font-size: 0.85rem; color: #6c757d;'>Limit 2GB per file • PDF, TXT, DOCX</div>
-                    </div>
-                </div>
-            </div>
+        <div class="custom-uploader">
+            <div class="custom-uploader-icon">☁️</div>
+            <div class="custom-uploader-text">Drag and drop files here</div>
+            <div class="custom-uploader-limit">Limit 2GB per file • PDF, TXT, DOCX</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -652,16 +636,10 @@ with st.container():
         
         # Custom image uploader with correct 2GB display
         st.markdown("""
-        <div style='background-color: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border: 2px dashed #dee2e6; margin: 0.5rem 0;'>
-            <div style='display: flex; align-items: center; justify-content: space-between;'>
-                <div style='display: flex; align-items: center;'>
-                    <span style='font-size: 1.5rem; margin-right: 0.5rem;'>☁️</span>
-                    <div>
-                        <div style='font-weight: bold; color: #495057;'>Drag and drop files here</div>
-                        <div style='font-size: 0.85rem; color: #6c757d;'>Limit 2GB per file • PNG, JPG, JPEG</div>
-                    </div>
-                </div>
-            </div>
+        <div class="custom-uploader">
+            <div class="custom-uploader-icon">☁️</div>
+            <div class="custom-uploader-text">Drag and drop files here</div>
+            <div class="custom-uploader-limit">Limit 2GB per file • PNG, JPG, JPEG</div>
         </div>
         """, unsafe_allow_html=True)
         
