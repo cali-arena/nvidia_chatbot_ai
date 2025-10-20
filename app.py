@@ -68,7 +68,7 @@ st.markdown("""
     display: none !important;
 }
 
-/* Hide any element containing "200MB" text */
+/* Hide any element containing unwanted text */
 *:contains("200MB") {
     display: none !important;
 }
@@ -97,14 +97,14 @@ st.markdown("""
     display: none !important;
 }
 
-/* Hide any span or div containing the exact text */
+/* Hide any span or div containing unwanted text */
 span:contains("Limit 200MB per file"),
 div:contains("Limit 200MB per file"),
 p:contains("Limit 200MB per file") {
     display: none !important;
 }
 
-/* Hide any element with the exact text pattern */
+/* Hide any element with unwanted text pattern */
 *[class*="upload"]:contains("200MB"),
 *[class*="file"]:contains("200MB") {
     display: none !important;
@@ -139,9 +139,9 @@ p:contains("Limit 200MB per file") {
 </style>
 
 <script>
-// JavaScript to remove any remaining "200MB" text
-function remove200MBText() {
-    // Find all elements containing "200MB"
+// JavaScript to remove any unwanted text
+function removeUnwantedText() {
+    // Find all elements containing unwanted text
     const elements = document.querySelectorAll('*');
     elements.forEach(element => {
         if (element.textContent && element.textContent.includes('200MB')) {
@@ -161,9 +161,9 @@ function remove200MBText() {
 }
 
 // Run immediately and on DOM changes
-remove200MBText();
-document.addEventListener('DOMContentLoaded', remove200MBText);
-setInterval(remove200MBText, 1000); // Check every second
+removeUnwantedText();
+document.addEventListener('DOMContentLoaded', removeUnwantedText);
+setInterval(removeUnwantedText, 1000); // Check every second
 </script>
 """, unsafe_allow_html=True)
 
