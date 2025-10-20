@@ -1,0 +1,17 @@
+streamlit
+langchain
+langchain-nvidia-ai-endpoints
+langchain-core
+langchain-community
+python-dotenv
+requests
+Pillow
+PyPDF2
+python-docx
+easyocr
+pandas
+numpy
+chromadb
+tiktoken
+typing-extensions
+scikit-learn

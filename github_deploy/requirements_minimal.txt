@@ -1,0 +1,12 @@
+streamlit
+langchain
+langchain-nvidia-ai-endpoints
+python-dotenv
+requests
+Pillow
+PyPDF2
+python-docx
+easyocr
+pandas
+numpy
+chromadb
