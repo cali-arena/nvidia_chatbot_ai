@@ -6,7 +6,7 @@ langchain-community
 python-dotenv
 requests
 Pillow
-PyPDF2
+pypdf
 python-docx
 easyocr
 pandas

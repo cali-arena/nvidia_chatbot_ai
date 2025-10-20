@@ -27,7 +27,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
 # Document processing imports
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from docx import Document
 
 # RAG System imports
