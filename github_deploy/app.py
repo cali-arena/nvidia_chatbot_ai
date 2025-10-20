@@ -571,8 +571,8 @@ def get_chat_response(user_message: str, chat_history: List, context: str = "", 
     except Exception as e:
         return f"Error: {str(e)}\n\nPlease check your API key and try again."
 
-# Main app
-st.title("🤖 NVIDIA AI Chatbot with Advanced RAG System")
+# Main app - UPDATED VERSION
+st.title("🤖 NVIDIA AI Chatbot with Advanced RAG System - TEST VERSION")
 
 # Chat input - MOVED TO TOP
 if prompt := st.chat_input("Ask me anything..."):
@@ -587,8 +587,8 @@ if prompt := st.chat_input("Ask me anything..."):
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             try:
-                # Simple response for testing
-                response = f"Hello! You asked: {prompt}. This is a test response to make sure the chat works."
+                # Simple response for testing - FORCE UPDATE
+                response = f"🎯 TEST SUCCESS! You asked: {prompt}. This is a test response to make sure the chat works. Version: {hash(prompt) % 1000}"
                 st.markdown(response)
                 
             except Exception as e:
