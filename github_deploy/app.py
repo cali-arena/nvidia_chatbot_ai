@@ -130,6 +130,15 @@ if "uploaded_docs" not in st.session_state:
 if "uploaded_images" not in st.session_state:
     st.session_state.uploaded_images = []
 
+if "document_context" not in st.session_state:
+    st.session_state.document_context = ""
+
+if "image_text_context" not in st.session_state:
+    st.session_state.image_text_context = ""
+
+if "image_context" not in st.session_state:
+    st.session_state.image_context = []
+
 if "api_key" not in st.session_state:
     # API key pré-configurada para o usuário
     st.session_state.api_key = "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"
@@ -577,8 +586,11 @@ if prompt := st.chat_input("Ask me anything..."):
     # Get AI response
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            # Prepare full context from session state
+            # Initialize all variables to prevent NameError
             full_context = ""
+            image_context = []
+            
+            # Prepare full context from session state
             if "document_context" in st.session_state:
                 full_context += st.session_state.document_context
             if "image_text_context" in st.session_state:
@@ -593,9 +605,9 @@ if prompt := st.chat_input("Ask me anything..."):
             if "uploaded_images" in locals() and uploaded_images:
                 full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
             
-            # Initialize image_context if not defined
-            if "image_context" not in locals():
-                image_context = []
+            # Use image_context from session state if available
+            if "image_context" in st.session_state:
+                image_context = st.session_state.image_context
             
             response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
             st.markdown(response)
