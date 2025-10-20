@@ -619,7 +619,7 @@ if prompt := st.chat_input("Ask me anything..."):
                     image_context = st.session_state.image_context
                 
                 # Check API key first
-                api_key = st.session_state.get("nvidia_api_key", "")
+                api_key = st.session_state.get("api_key", "")
                 if not api_key:
                     response = "⚠️ API Key não configurada. Configure sua chave NVIDIA na barra lateral para respostas da IA."
                     st.markdown(response)
