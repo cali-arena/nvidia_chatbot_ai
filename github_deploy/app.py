@@ -586,31 +586,37 @@ if prompt := st.chat_input("Ask me anything..."):
     # Get AI response
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            # Initialize all variables to prevent NameError
-            full_context = ""
-            image_context = []
-            
-            # Prepare full context from session state
-            if "document_context" in st.session_state:
-                full_context += st.session_state.document_context
-            if "image_text_context" in st.session_state:
-                full_context += st.session_state.image_text_context
-            
-            # Add current upload contexts if they exist
-            if "document_context" in locals():
-                full_context += document_context
-            if "image_text_context" in locals():
-                full_context += image_text_context
+            try:
+                # Initialize all variables to prevent NameError
+                full_context = ""
+                image_context = []
                 
-            if "uploaded_images" in locals() and uploaded_images:
-                full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
-            
-            # Use image_context from session state if available
-            if "image_context" in st.session_state:
-                image_context = st.session_state.image_context
-            
-            response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
-            st.markdown(response)
+                # Prepare full context from session state
+                if "document_context" in st.session_state:
+                    full_context += st.session_state.document_context
+                if "image_text_context" in st.session_state:
+                    full_context += st.session_state.image_text_context
+                
+                # Add current upload contexts if they exist
+                if "document_context" in locals():
+                    full_context += document_context
+                if "image_text_context" in locals():
+                    full_context += image_text_context
+                    
+                if "uploaded_images" in locals() and uploaded_images:
+                    full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
+                
+                # Use image_context from session state if available
+                if "image_context" in st.session_state:
+                    image_context = st.session_state.image_context
+                
+                response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
+                st.markdown(response)
+                
+            except Exception as e:
+                st.error(f"Error generating response: {str(e)}")
+                response = "I apologize, but I encountered an error. Please try again."
+                st.markdown(response)
     
     # Add assistant response to chat
     st.session_state.messages.append({"role": "assistant", "content": response})
