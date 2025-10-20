@@ -610,20 +610,20 @@ if prompt := st.chat_input("Ask me anything..."):
                 if "image_context" in st.session_state:
                     image_context = st.session_state.image_context
                 
-                # Check if API key is configured
-                if not st.session_state.get("nvidia_api_key"):
-                    st.warning("⚠️ API Key não configurada. Configure sua chave NVIDIA na barra lateral.")
-                    response = f"🤖 Resposta da IA: Você perguntou sobre '{prompt}'. Configure sua API key NVIDIA para respostas completas."
+                # Check API key first
+                api_key = st.session_state.get("nvidia_api_key", "")
+                if not api_key:
+                    response = "⚠️ API Key não configurada. Configure sua chave NVIDIA na barra lateral para respostas da IA."
                     st.markdown(response)
                 else:
-                    # Test if get_chat_response works
+                    # Force API call - remove test response
                     try:
                         response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
                         st.markdown(response)
                     except Exception as api_error:
                         st.error(f"API Error: {str(api_error)}")
-                        # Fallback response
-                        response = f"🤖 Resposta da IA: Você perguntou sobre '{prompt}'. Erro na API: {str(api_error)}"
+                        # Show detailed error for debugging
+                        response = f"🔍 DEBUG: Erro na API - {str(api_error)}. API Key: {api_key[:10]}..."
                         st.markdown(response)
                 
             except Exception as e:
