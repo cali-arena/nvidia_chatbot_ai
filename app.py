@@ -595,9 +595,44 @@ if prompt := st.chat_input("Ask me anything..."):
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             try:
-                # Simple response for testing
-                response = f"Hello! You asked: {prompt}. This is a test response to make sure the chat works."
-                st.markdown(response)
+                # Initialize all variables to prevent NameError
+                full_context = ""
+                image_context = []
+                
+                # Prepare full context from session state
+                if "document_context" in st.session_state:
+                    full_context += st.session_state.document_context
+                if "image_text_context" in st.session_state:
+                    full_context += st.session_state.image_text_context
+                
+                # Add current upload contexts if they exist
+                if "document_context" in locals():
+                    full_context += document_context
+                if "image_text_context" in locals():
+                    full_context += image_text_context
+                    
+                if "uploaded_images" in locals() and uploaded_images:
+                    full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
+                
+                # Use image_context from session state if available
+                if "image_context" in st.session_state:
+                    image_context = st.session_state.image_context
+                
+                # Check API key first
+                api_key = st.session_state.get("nvidia_api_key", "")
+                if not api_key:
+                    response = "⚠️ API Key não configurada. Configure sua chave NVIDIA na barra lateral para respostas da IA."
+                    st.markdown(response)
+                else:
+                    # Force API call - remove test response
+                    try:
+                        response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
+                        st.markdown(response)
+                    except Exception as api_error:
+                        st.error(f"API Error: {str(api_error)}")
+                        # Show detailed error for debugging
+                        response = f"🔍 DEBUG: Erro na API - {str(api_error)}. API Key: {api_key[:10]}..."
+                        st.markdown(response)
                 
             except Exception as e:
                 st.error(f"Error generating response: {str(e)}")
