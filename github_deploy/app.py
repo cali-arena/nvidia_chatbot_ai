@@ -587,8 +587,30 @@ if prompt := st.chat_input("Ask me anything..."):
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             try:
-                # Simple response for testing - FORCE UPDATE
-                response = f"🎯 TEST SUCCESS! You asked: {prompt}. This is a test response to make sure the chat works. Version: {hash(prompt) % 1000}"
+                # Initialize all variables to prevent NameError
+                full_context = ""
+                image_context = []
+                
+                # Prepare full context from session state
+                if "document_context" in st.session_state:
+                    full_context += st.session_state.document_context
+                if "image_text_context" in st.session_state:
+                    full_context += st.session_state.image_text_context
+                
+                # Add current upload contexts if they exist
+                if "document_context" in locals():
+                    full_context += document_context
+                if "image_text_context" in locals():
+                    full_context += image_text_context
+                    
+                if "uploaded_images" in locals() and uploaded_images:
+                    full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
+                
+                # Use image_context from session state if available
+                if "image_context" in st.session_state:
+                    image_context = st.session_state.image_context
+                
+                response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
                 st.markdown(response)
                 
             except Exception as e:
