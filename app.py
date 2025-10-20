@@ -88,6 +88,28 @@ st.markdown("""
     display: none !important;
 }
 
+/* NUCLEAR OPTION: Hide ALL text in file uploader areas */
+.stFileUploader div[data-testid="stFileUploader"] {
+    display: none !important;
+}
+
+.stFileUploader > div > div > div > div > div > div > div > div > div > div {
+    display: none !important;
+}
+
+/* Hide any span or div containing the exact text */
+span:contains("Limit 200MB per file"),
+div:contains("Limit 200MB per file"),
+p:contains("Limit 200MB per file") {
+    display: none !important;
+}
+
+/* Hide any element with the exact text pattern */
+*[class*="upload"]:contains("200MB"),
+*[class*="file"]:contains("200MB") {
+    display: none !important;
+}
+
 /* Custom file uploader styling */
 .custom-uploader {
     background-color: #f8f9fa;
