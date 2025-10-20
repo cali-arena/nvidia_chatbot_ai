@@ -143,6 +143,14 @@ if "api_key" not in st.session_state:
     # API key pré-configurada para o usuário
     st.session_state.api_key = "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"
 
+# Initialize global variables to prevent NameError
+full_context = ""
+image_context = []
+document_context = ""
+image_text_context = ""
+uploaded_files = []
+uploaded_images = []
+
 # Initialize RAG system
 if RAG_AVAILABLE and "rag_system" not in st.session_state:
     try:
