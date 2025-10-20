@@ -53,119 +53,72 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS and JavaScript to completely hide Streamlit's default text
+# Custom CSS for better UI and hide 200MB text
 st.markdown("""
-<style>
-/* Hide ALL Streamlit default file uploader text */
-.stFileUploader > div > div > div > div > div {
-    display: none !important;
-}
-
-/* Hide the entire uploader text container */
-.stFileUploader > div > div > div > div > div > div,
-.stFileUploader > div > div > div > div > div > div > div,
-.stFileUploader > div > div > div > div > div > div > div > div {
-    display: none !important;
-}
-
-/* Hide any element containing unwanted text */
-*:contains("200MB") {
-    display: none !important;
-}
-
-/* Hide any element containing "MB per file" text */
-*:contains("MB per file") {
-    display: none !important;
-}
-
-/* Hide any element containing "Limit" text */
-*:contains("Limit") {
-    display: none !important;
-}
-
-/* Hide the specific uploader text area */
-.stFileUploader > div > div > div > div > div > div > div > div > div {
-    display: none !important;
-}
-
-/* NUCLEAR OPTION: Hide ALL text in file uploader areas */
-.stFileUploader div[data-testid="stFileUploader"] {
-    display: none !important;
-}
-
-.stFileUploader > div > div > div > div > div > div > div > div > div > div {
-    display: none !important;
-}
-
-/* Hide any span or div containing unwanted text */
-span:contains("Limit 200MB per file"),
-div:contains("Limit 200MB per file"),
-p:contains("Limit 200MB per file") {
-    display: none !important;
-}
-
-/* Hide any element with unwanted text pattern */
-*[class*="upload"]:contains("200MB"),
-*[class*="file"]:contains("200MB") {
-    display: none !important;
-}
-
-/* Custom file uploader styling */
-.custom-uploader {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: 2px dashed #dee2e6;
-    margin: 0.5rem 0;
-    text-align: center;
-}
-
-.custom-uploader-text {
-    font-weight: bold;
-    color: #495057;
-    margin-bottom: 0.5rem;
-}
-
-.custom-uploader-limit {
-    font-size: 0.85rem;
-    color: #6c757d;
-    margin-bottom: 1rem;
-}
-
-.custom-uploader-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-</style>
-
-<script>
-// JavaScript to remove any unwanted text
-function removeUnwantedText() {
-    // Find all elements containing unwanted text
-    const elements = document.querySelectorAll('*');
-    elements.forEach(element => {
-        if (element.textContent && element.textContent.includes('200MB')) {
-            element.style.display = 'none';
-            element.remove();
-        }
-    });
+    <style>
+    .main {
+        background-color: #0e1117;
+    }
+    .stTextInput > div > div > input {
+        background-color: #1e2130;
+        color: white;
+    }
+    .chat-message {
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .chat-message.user {
+        background-color: #2b313e;
+    }
+    .chat-message.assistant {
+        background-color: #1e2130;
+    }
+    .chat-message .message {
+        color: #ffffff;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    .stButton > button {
+        background-color: #76b900;
+        color: white;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+    }
+    .stButton > button:hover {
+        background-color: #5a8f00;
+    }
+    .upload-section {
+        background-color: #1e2130;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
     
-    // Find all elements containing "Limit" and "MB per file"
-    elements.forEach(element => {
-        if (element.textContent && 
-            (element.textContent.includes('Limit') && element.textContent.includes('MB per file'))) {
-            element.style.display = 'none';
-            element.remove();
-        }
-    });
-}
-
-// Run immediately and on DOM changes
-removeUnwantedText();
-document.addEventListener('DOMContentLoaded', removeUnwantedText);
-setInterval(removeUnwantedText, 1000); // Check every second
-</script>
-""", unsafe_allow_html=True)
+    /* Hide 200MB text from file uploaders */
+    .stFileUploader > div > div > div > div > div {
+        display: none !important;
+    }
+    
+    /* Hide any element containing 200MB text */
+    *:contains("200MB") {
+        display: none !important;
+    }
+    
+    /* Hide any element containing "MB per file" text */
+    *:contains("MB per file") {
+        display: none !important;
+    }
+    
+    /* Hide any element containing "Limit" text */
+    *:contains("Limit") {
+        display: none !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # Initialize session state
 if "messages" not in st.session_state:
@@ -176,6 +129,15 @@ if "uploaded_docs" not in st.session_state:
 
 if "uploaded_images" not in st.session_state:
     st.session_state.uploaded_images = []
+
+if "document_context" not in st.session_state:
+    st.session_state.document_context = ""
+
+if "image_text_context" not in st.session_state:
+    st.session_state.image_text_context = ""
+
+if "image_context" not in st.session_state:
+    st.session_state.image_context = []
 
 if "api_key" not in st.session_state:
     # API key pré-configurada para o usuário
@@ -624,28 +586,37 @@ if prompt := st.chat_input("Ask me anything..."):
     # Get AI response
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            # Prepare full context from session state
-            full_context = ""
-            if "document_context" in st.session_state:
-                full_context += st.session_state.document_context
-            if "image_text_context" in st.session_state:
-                full_context += st.session_state.image_text_context
-            
-            # Add current upload contexts if they exist
-            if "document_context" in locals():
-                full_context += document_context
-            if "image_text_context" in locals():
-                full_context += image_text_context
-                
-            if "uploaded_images" in locals() and uploaded_images:
-                full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
-            
-            # Initialize image_context if not defined
-            if "image_context" not in locals():
+            try:
+                # Initialize all variables to prevent NameError
+                full_context = ""
                 image_context = []
-            
-            response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
-            st.markdown(response)
+                
+                # Prepare full context from session state
+                if "document_context" in st.session_state:
+                    full_context += st.session_state.document_context
+                if "image_text_context" in st.session_state:
+                    full_context += st.session_state.image_text_context
+                
+                # Add current upload contexts if they exist
+                if "document_context" in locals():
+                    full_context += document_context
+                if "image_text_context" in locals():
+                    full_context += image_text_context
+                    
+                if "uploaded_images" in locals() and uploaded_images:
+                    full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
+                
+                # Use image_context from session state if available
+                if "image_context" in st.session_state:
+                    image_context = st.session_state.image_context
+                
+                response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
+                st.markdown(response)
+                
+            except Exception as e:
+                st.error(f"Error generating response: {str(e)}")
+                response = "I apologize, but I encountered an error. Please try again."
+                st.markdown(response)
     
     # Add assistant response to chat
     st.session_state.messages.append({"role": "assistant", "content": response})
@@ -689,45 +660,13 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
         
-        # Custom file uploader with correct 2GB display
-        st.markdown("""
-        <div class="custom-uploader">
-            <div class="custom-uploader-icon">☁️</div>
-            <div class="custom-uploader-text">Drag and drop files here</div>
-            <div class="custom-uploader-limit">Limit 2GB per file • PDF, TXT, DOCX</div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Completely hide the file uploader and use custom interface
-        st.markdown("""
-        <style>
-        /* Hide ALL file uploader components */
-        .stFileUploader,
-        div[data-testid="stFileUploader"],
-        .stFileUploader > div,
-        .stFileUploader > div > div,
-        .stFileUploader > div > div > div,
-        .stFileUploader > div > div > div > div,
-        .stFileUploader > div > div > div > div > div {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            height: 0 !important;
-            width: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-        
-        # Hidden file uploader - completely invisible
         uploaded_files = st.file_uploader(
-            "",
+            "📄 Documentos",
             type=["pdf", "txt", "docx"],
             accept_multiple_files=True,
             key="doc_uploader",
             label_visibility="collapsed",
-            help=""
+            help="PDF, TXT, DOCX - Limite: 2GB"
         )
     
     with col2:
@@ -738,45 +677,13 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
         
-        # Custom image uploader with correct 2GB display
-        st.markdown("""
-        <div class="custom-uploader">
-            <div class="custom-uploader-icon">☁️</div>
-            <div class="custom-uploader-text">Drag and drop files here</div>
-            <div class="custom-uploader-limit">Limit 2GB per file • PNG, JPG, JPEG</div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Completely hide the image uploader and use custom interface
-        st.markdown("""
-        <style>
-        /* Hide ALL image uploader components */
-        .stFileUploader,
-        div[data-testid="stFileUploader"],
-        .stFileUploader > div,
-        .stFileUploader > div > div,
-        .stFileUploader > div > div > div,
-        .stFileUploader > div > div > div > div,
-        .stFileUploader > div > div > div > div > div {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            height: 0 !important;
-            width: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-        
-        # Hidden image uploader - completely invisible
         uploaded_images = st.file_uploader(
-            "",
+            "🖼️ Imagens",
             type=["png", "jpg", "jpeg"],
             accept_multiple_files=True,
             key="image_uploader",
             label_visibility="collapsed",
-            help=""
+            help="PNG, JPG, JPEG - Limite: 2GB"
         )
 
 # Process uploaded documents with RAG system - moved below uploads for better flow
