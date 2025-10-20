@@ -61,11 +61,6 @@ st.markdown("""
     display: none !important;
 }
 
-/* Hide any text containing "200MB" or "MB" */
-div:contains("200MB"), div:contains("MB per file") {
-    display: none !important;
-}
-
 /* Hide the entire uploader text container */
 .stFileUploader > div > div > div > div > div > div,
 .stFileUploader > div > div > div > div > div > div > div,
@@ -73,9 +68,23 @@ div:contains("200MB"), div:contains("MB per file") {
     display: none !important;
 }
 
-/* Hide any element that contains "Limit" and "MB" */
-div[class*="upload"]:has-text("200MB"),
-div[class*="upload"]:has-text("MB per file") {
+/* Hide any element containing "200MB" text */
+*:contains("200MB") {
+    display: none !important;
+}
+
+/* Hide any element containing "MB per file" text */
+*:contains("MB per file") {
+    display: none !important;
+}
+
+/* Hide any element containing "Limit" text */
+*:contains("Limit") {
+    display: none !important;
+}
+
+/* Hide the specific uploader text area */
+.stFileUploader > div > div > div > div > div > div > div > div > div {
     display: none !important;
 }
 
