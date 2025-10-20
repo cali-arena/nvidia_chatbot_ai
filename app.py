@@ -666,13 +666,33 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
         
+        # Hide the entire file uploader and replace with custom interface
+        st.markdown("""
+        <style>
+        /* Hide the entire file uploader component */
+        div[data-testid="stFileUploader"] {
+            display: none !important;
+        }
+        
+        /* Hide any file uploader related elements */
+        .stFileUploader {
+            display: none !important;
+        }
+        
+        /* Hide the uploader container */
+        div[data-testid="stFileUploader"] > div {
+            display: none !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         uploaded_files = st.file_uploader(
-            "📄 Documentos",
+            "",
             type=["pdf", "txt", "docx"],
             accept_multiple_files=True,
             key="doc_uploader",
             label_visibility="collapsed",
-            help="PDF, TXT, DOCX - Limite: 2GB"
+            help=""
         )
     
     with col2:
@@ -692,13 +712,33 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
         
+        # Hide the entire image uploader and replace with custom interface
+        st.markdown("""
+        <style>
+        /* Hide the entire image uploader component */
+        div[data-testid="stFileUploader"] {
+            display: none !important;
+        }
+        
+        /* Hide any image uploader related elements */
+        .stFileUploader {
+            display: none !important;
+        }
+        
+        /* Hide the image uploader container */
+        div[data-testid="stFileUploader"] > div {
+            display: none !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         uploaded_images = st.file_uploader(
-            "🖼️ Imagens",
+            "",
             type=["png", "jpg", "jpeg"],
             accept_multiple_files=True,
             key="image_uploader",
             label_visibility="collapsed",
-            help="PNG, JPG, JPEG - Limite: 2GB"
+            help=""
         )
 
 # Process uploaded documents with RAG system - moved below uploads for better flow
