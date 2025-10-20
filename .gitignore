@@ -75,5 +75,5 @@ tmp/
 *.rar
 *.7z
 
-# GitHub deploy (embedded repo)
-github_deploy/
+# GitHub deploy (embedded repo) - REMOVED TO ALLOW DEPLOY
+# github_deploy/
