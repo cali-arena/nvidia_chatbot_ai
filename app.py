@@ -53,7 +53,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS to completely hide Streamlit's default text
+# Custom CSS and JavaScript to completely hide Streamlit's default text
 st.markdown("""
 <style>
 /* Hide ALL Streamlit default file uploader text */
@@ -137,6 +137,34 @@ p:contains("Limit 200MB per file") {
     margin-bottom: 0.5rem;
 }
 </style>
+
+<script>
+// JavaScript to remove any remaining "200MB" text
+function remove200MBText() {
+    // Find all elements containing "200MB"
+    const elements = document.querySelectorAll('*');
+    elements.forEach(element => {
+        if (element.textContent && element.textContent.includes('200MB')) {
+            element.style.display = 'none';
+            element.remove();
+        }
+    });
+    
+    // Find all elements containing "Limit" and "MB per file"
+    elements.forEach(element => {
+        if (element.textContent && 
+            (element.textContent.includes('Limit') && element.textContent.includes('MB per file'))) {
+            element.style.display = 'none';
+            element.remove();
+        }
+    });
+}
+
+// Run immediately and on DOM changes
+remove200MBText();
+document.addEventListener('DOMContentLoaded', remove200MBText);
+setInterval(remove200MBText, 1000); // Check every second
+</script>
 """, unsafe_allow_html=True)
 
 # Initialize session state
