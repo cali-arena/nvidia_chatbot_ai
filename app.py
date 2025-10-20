@@ -694,26 +694,29 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
         
-        # Hide the entire file uploader and replace with custom interface
+        # Completely hide the file uploader and use custom interface
         st.markdown("""
         <style>
-        /* Hide the entire file uploader component */
-        div[data-testid="stFileUploader"] {
+        /* Hide ALL file uploader components */
+        .stFileUploader,
+        div[data-testid="stFileUploader"],
+        .stFileUploader > div,
+        .stFileUploader > div > div,
+        .stFileUploader > div > div > div,
+        .stFileUploader > div > div > div > div,
+        .stFileUploader > div > div > div > div > div {
             display: none !important;
-        }
-        
-        /* Hide any file uploader related elements */
-        .stFileUploader {
-            display: none !important;
-        }
-        
-        /* Hide the uploader container */
-        div[data-testid="stFileUploader"] > div {
-            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         </style>
         """, unsafe_allow_html=True)
         
+        # Hidden file uploader - completely invisible
         uploaded_files = st.file_uploader(
             "",
             type=["pdf", "txt", "docx"],
@@ -740,26 +743,29 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
         
-        # Hide the entire image uploader and replace with custom interface
+        # Completely hide the image uploader and use custom interface
         st.markdown("""
         <style>
-        /* Hide the entire image uploader component */
-        div[data-testid="stFileUploader"] {
+        /* Hide ALL image uploader components */
+        .stFileUploader,
+        div[data-testid="stFileUploader"],
+        .stFileUploader > div,
+        .stFileUploader > div > div,
+        .stFileUploader > div > div > div,
+        .stFileUploader > div > div > div > div,
+        .stFileUploader > div > div > div > div > div {
             display: none !important;
-        }
-        
-        /* Hide any image uploader related elements */
-        .stFileUploader {
-            display: none !important;
-        }
-        
-        /* Hide the image uploader container */
-        div[data-testid="stFileUploader"] > div {
-            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         </style>
         """, unsafe_allow_html=True)
         
+        # Hidden image uploader - completely invisible
         uploaded_images = st.file_uploader(
             "",
             type=["png", "jpg", "jpeg"],
