@@ -640,6 +640,10 @@ if prompt := st.chat_input("Ask me anything..."):
             if "uploaded_images" in locals() and uploaded_images:
                 full_context += "\n\nNote: User has uploaded images that are available for visual analysis."
             
+            # Initialize image_context if not defined
+            if "image_context" not in locals():
+                image_context = []
+            
             response = get_chat_response(prompt, st.session_state.messages, full_context, image_context)
             st.markdown(response)
     
