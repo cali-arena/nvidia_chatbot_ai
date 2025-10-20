@@ -4,7 +4,7 @@ langchain-nvidia-ai-endpoints
 python-dotenv
 requests
 Pillow
-PyPDF2
+pypdf
 python-docx
 easyocr
 pandas

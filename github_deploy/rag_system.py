@@ -41,7 +41,7 @@ from langchain.schema import BaseRetriever
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
 # Document processing
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from docx import Document as DocxDocument
 try:
     import tiktoken
